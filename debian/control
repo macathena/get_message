@@ -2,8 +2,8 @@ Source: debathena-get-message
 Section: debathena/net
 Priority: extra
 Maintainer: Debathena Project <debathena@mit.edu>
-Build-Depends: @cdbs@, comerr-dev, libhesiod-dev, debathena-libgms-dev
-Standards-Version: 3.7.2
+Build-Depends: cdbs, debhelper, dh-buildinfo, autoconf, comerr-dev, libhesiod-dev, debathena-libgms-dev
+Standards-Version: 3.9.3
 
 Package: debathena-get-message
 Architecture: any
