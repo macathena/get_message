@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
 import hesiod
+import os
 import select
 import socket
-import os
+import sys
 from optparse import OptionParser
 
 MESSAGE_VERS = 'GMS:0'
@@ -91,16 +92,15 @@ def main():
     parser = OptionParser()
     parser.add_option("-n", action="store_true", dest="new", default=False)
     parser.add_option("-l", action="store_true", dest="login", default=False)
-    (options, args) = parser.parse_args()
-    msg = get_message()
-    # Check flags
-    if options.login and not has_seen(msg[1]):
-        # If the user has not seen the message, return the message. However, cannot assume user will see this message so don't write times.
-        print msg[2]
-    elif options.new and not has_seen(msg[1]) or (not options.login and not options.new):
-        # If the user has not seen the message, write message times and return the message
-        write_message_times(msg[1])
-        print msg[2]
+    options, args = parser.parse_args()
+    version, timestamp, content = get_message()
+    if options.new and has_seen(timestamp):
+        # This is an already-seen message, and new-only was requested.
+        sys.exit(0)
+    if not options.login:
+        # Update the timestamp so we know this message has been seen
+        write_message_times(timestamp)
+    print content
 
 if __name__ == "__main__":
     main()
