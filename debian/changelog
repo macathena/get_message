@@ -1,4 +1,4 @@
-debathena-get-message (10.1-0debathena1) UNRELEASED; urgency=low
+debathena-get-message (10.1-0debathena1) unstable; urgency=low
 
   [ Jonathan Reed ]
   * Bump debian/compat to 6
@@ -9,8 +9,10 @@ debathena-get-message (10.1-0debathena1) UNRELEASED; urgency=low
   [ Alexander Chernyakhovsky ]
   * Re-write in python
   * Update to dh7
+  * Add git-buildpackage configuration
+  * Set source format to 3.0 (quilt)
 
- -- Alexander Chernyakhovsky <achernya@mit.edu>  Sat, 11 Jan 2014 18:22:48 -0500
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Mon, 10 Feb 2014 20:23:56 -0500
 
 debathena-get-message (10.0.1-0debathena2) unstable; urgency=low
 
