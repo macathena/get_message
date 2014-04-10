@@ -1,3 +1,11 @@
+debathena-get-message (10.1.1-0debathena1) unstable; urgency=low
+
+  * Package 10.1.1, which restores support for non-GNU-style long
+    arguments
+  * Create the message cache directory (Trac: #1459)
+
+ -- Jonathan Reed <jdreed@mit.edu>  Thu, 10 Apr 2014 11:28:15 -0400
+
 debathena-get-message (10.1-0debathena1) unstable; urgency=low
 
   [ Jonathan Reed ]
