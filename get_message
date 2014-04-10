@@ -92,7 +92,15 @@ def main():
     parser = OptionParser()
     parser.add_option("-n", action="store_true", dest="new", default=False)
     parser.add_option("-l", action="store_true", dest="login", default=False)
-    options, args = parser.parse_args()
+    parser.add_option("-z", action="store_true", dest="zephyr", default=False)
+    # This is why we can't have nice things
+    old_args = { '-new': '-n',
+                 '-login': '-l',
+                 '-zephyr': '-z' }
+    options, args = parser.parse_args(
+        [old_args.get(x, x) for x in sys.argv[1:]])
+    if options.zephyr:
+        print >>sys.stderr, "get_message: The -z/-zephyr option is deprecated."
     version, timestamp, content = get_message()
     if options.new and has_seen(timestamp):
         # This is an already-seen message, and new-only was requested.
