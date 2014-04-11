@@ -1,3 +1,10 @@
+debathena-get-message (10.1.1-0debathena2) unstable; urgency=low
+
+  * Add a postinst to correctly set permissions on the message cache and
+    actually fix this (Trac: #1459)
+
+ -- Jonathan Reed <jdreed@mit.edu>  Fri, 11 Apr 2014 12:29:28 -0400
+
 debathena-get-message (10.1.1-0debathena1) unstable; urgency=low
 
   * Package 10.1.1, which restores support for non-GNU-style long
