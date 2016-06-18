@@ -1,3 +1,9 @@
+debathena-get-message (10.1.1-0debathena3) unstable; urgency=medium
+
+  * Replace python-support with dh-python
+
+ -- Victor Vasiliev <vasilvv@mit.edu>  Fri, 17 Jun 2016 22:19:36 -0400
+
 debathena-get-message (10.1.1-0debathena2) unstable; urgency=low
 
   * Add a postinst to correctly set permissions on the message cache and
