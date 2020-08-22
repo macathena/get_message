@@ -1,10 +1,12 @@
 #!/usr/bin/python
 
+from __future__ import print_function
 import hesiod
 import os
 import select
 import socket
 import sys
+import six
 from optparse import OptionParser
 
 MESSAGE_VERS = 'GMS:0'
@@ -25,7 +27,7 @@ def parse(msg):
     """Parse a gms message, returning a version, timestamp, text tuple
     if successful, and an Exception otherwise."""
     try:
-        header, text = msg.split('\n', 1)
+        header, text = six.ensure_str(msg).split('\n', 1)
         version, timestamp = header.split(' ', 1)
         if version != MESSAGE_VERS:
             raise Exception('Incompatible version of GMS [%s] found' % (version,))
@@ -59,7 +61,7 @@ def write_message_times(timestamp):
 def fetch_message():
     """Connect to the globalmessage server, and read a message."""
     server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    server.sendto('%s 0\n' % (MESSAGE_VERS,), (get_server(), GMS_PORT))
+    server.sendto(six.ensure_binary('%s 0\n' % (MESSAGE_VERS,)), (get_server(), GMS_PORT))
     message = None
     readable, _, _  = select.select([server], [], [], MESSAGE_TIMEOUT)
     for i in readable:
@@ -100,7 +102,7 @@ def main():
     options, args = parser.parse_args(
         [old_args.get(x, x) for x in sys.argv[1:]])
     if options.zephyr:
-        print >>sys.stderr, "get_message: The -z/-zephyr option is deprecated."
+        print("get_message: The -z/-zephyr option is deprecated.", file=sys.stderr)
     version, timestamp, content = get_message()
     if options.new and has_seen(timestamp):
         # This is an already-seen message, and new-only was requested.
@@ -108,7 +110,7 @@ def main():
     if not options.login:
         # Update the timestamp so we know this message has been seen
         write_message_times(timestamp)
-    print content
+    print(content)
 
 if __name__ == "__main__":
     main()
